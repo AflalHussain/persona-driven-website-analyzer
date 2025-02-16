@@ -41,28 +41,100 @@ export ANTHROPIC_API_KEY=<your_api_key>
 
 ## Usage
 
-Running the Analysis
+### Example Websites for Testing
 
-To run the analysis, use the run_analysis.py script. You can specify the site URL and persona name as command-line arguments.
-Example:
+1. **Data/Analytics Platforms:**
+   - Databricks (https://databricks.com)
+   - Snowflake (https://snowflake.com)
+   - Tableau (https://tableau.com)
 
+2. **Cloud Services:**
+   - AWS Analytics (https://aws.amazon.com/analytics)
+   - Azure Data Services (https://azure.microsoft.com/solutions/data-platform)
+   - Google Cloud Analytics (https://cloud.google.com/solutions/smart-analytics)
+
+3. **Business Intelligence Tools:**
+   - Power BI (https://powerbi.microsoft.com)
+   - Looker (https://looker.com)
+   - Sisense (https://sisense.com)
+
+### Available Personas
+
+1. **Data Engineer Dave**
+   ```yaml
+   interests:
+     - Data Engineering
+     - Machine Learning
+     - Big Data Processing
+     - Cloud Architecture
+     - Data Pipelines
+   needs:
+     - Technical documentation
+     - Platform capabilities
+     - Integration details
+     - Pricing information
+     - Performance benchmarks
+   goals:
+     - Evaluate data processing capabilities
+     - Understand MLOps features
+     - Compare pricing tiers
+     - Find implementation examples
+     - Access technical specifications
+   ```
+
+2. **Business Analyst Bob**
+   ```yaml
+   interests:
+     - Business Intelligence
+     - Data Analytics
+     - Market Research
+     - Reporting Tools
+     - Data-Driven Decision Making
+   needs:
+     - Dashboard tools
+     - Reporting capabilities
+     - Data integration solutions
+     - User-friendly interfaces
+     - Training resources
+   goals:
+     - Generate actionable insights
+     - Create comprehensive reports
+     - Analyze market trends
+     - Support strategic planning
+     - Improve operational efficiency
+   ```
+
+### Example Analysis Commands
+
+1. Analyze Databricks from Data Engineer perspective:
 ```bash
-python run_analysis.py https://example.com  persona1
+python run_analysis --url https://databricks.com --persona data_engineer
 ```
 
-## Available Personas
-You can define personas in the config/personas.yaml file. Each persona should include:
+2. Analyze Tableau from Business Analyst perspective:
+```bash
+python run_analysis --url https://tableau.com --persona business_analyst
+```
 
-* Name
-* Interests
-* Needs
-* Goals
+3. Custom analysis of any website:
+```bash
+custom-analysis
+# Follow prompts to create persona and enter website URL
+```
 
-Example of a persona definition:
+### Sample Analysis Scenarios
 
-```yaml
-Custom Personas
-You can also create custom personas using the custom_persona.py script. This allows you to define a persona interactively.
+1. **Technical Platform Evaluation:**
+   ```bash
+   python run_analysis --url https://databricks.com --persona data_engineer --max-pages 10
+   ```
+   This will analyze Databricks' technical capabilities, documentation, and implementation details.
+
+2. **BI Tool Assessment:**
+   ```bash
+   python run_analysis --url https://powerbi.microsoft.com --persona business_analyst --max-pages 8
+   ```
+   This will evaluate Power BI's reporting capabilities, user interface, and business features.
 
 ## Report Generation
 The agent generates a report in JSON format, saved in the reports directory. The report includes:
