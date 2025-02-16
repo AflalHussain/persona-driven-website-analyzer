@@ -28,22 +28,30 @@ def load_persona(persona_name: str) -> Persona:
         goals=persona_config['goals']
     )
 
-def run_analysis(site_url: str, persona_name: str):
+def main():
+    parser = argparse.ArgumentParser(description='Run website analysis with a specified persona.')
+    parser.add_argument('--url', type=str, required=True, help='The URL of the site to analyze')
+    parser.add_argument('--persona', type=str, required=True, help='The name of the persona to use for analysis')
+    parser.add_argument('--max-pages', type=int, default=5, help='Maximum number of pages to analyze')
+    
+    args = parser.parse_args()
+    
     # Load environment variables
     load_dotenv()
     
     # Set up logging
     logger = setup_logging()
-    logger.info(f"Running analysis for {persona_name} on {site_url}") 
+    logger.info(f"Running analysis for {args.persona} on {args.url}")
+    
     try:
         # Load persona configuration
-        persona = load_persona(persona_name)
+        persona = load_persona(args.persona)
         
         # Initialize agent
         agent = PersonaAgent(persona)
         
         # Start website analysis
-        report = agent.navigate(site_url, max_pages=2)
+        report = agent.navigate(args.url, max_pages=args.max_pages)
         
         # Save report
         output_file = f"reports/analysis_report_{persona.name.lower().replace(' ', '_')}.json"
@@ -59,9 +67,4 @@ def run_analysis(site_url: str, persona_name: str):
         sys.exit(1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run website analysis with a specified persona.')
-    parser.add_argument('site_url', type=str, help='The URL of the site to analyze')
-    parser.add_argument('persona_name', type=str, help='The name of the persona to use for analysis')
-    
-    args = parser.parse_args()
-    run_analysis(args.site_url, args.persona_name)
+    main()
