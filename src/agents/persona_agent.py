@@ -303,7 +303,7 @@ class PersonaAgent(BaseAgent):
                 overall_impression="Analysis failed"
             )
 
-    def navigate(self, start_url: str, max_pages: int = 5) -> Dict[str, Any]:
+    def navigate(self, start_url: str, max_pages: int = 100) -> Dict[str, Any]:
         """Navigate through website and generate analysis report"""
         logger.info(f"Starting navigation from {start_url}")
         self.crawler.base_url = start_url
