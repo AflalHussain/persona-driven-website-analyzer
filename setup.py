@@ -30,7 +30,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "analyze-website=examples.basic_analysis:main",
+            "analyze-website=run_analysis:main",
             "custom-analysis=examples.custom_persona:main",
         ],
     },
