@@ -348,6 +348,7 @@ class PersonaAgent(BaseAgent):
             exit_reason = f"Error: {str(e)}"
             
         finally:
+            final_conclusion = self._generate_final_conclusion()
             # Generate report even if navigation was incomplete
             report = AnalysisReport(
                 persona_name=self.persona.name,
@@ -365,38 +366,52 @@ class PersonaAgent(BaseAgent):
                 navigation_path=self.memory.navigation_path,
                 exit_reason=exit_reason,
                 information_coverage=self._calculate_information_coverage(),
-                found_ctas=self.memory.found_ctas
+                found_ctas=self.memory.found_ctas,
+                final_conclusion=final_conclusion
             )
             
             return report.to_dict() 
         
+    def _log_decision(self, decision_type: str, context: str, reasoning: str) -> Dict[str, str]:
+        """Log a decision with context and reasoning"""
+        decision = {
+            "timestamp": datetime.now().isoformat(),
+            "type": decision_type,
+            "context": context,
+            "reasoning": reasoning,
+            "persona_attributes": {
+                "interests": self.persona.interests,
+                "needs": self.persona.needs,
+                "goals": self.persona.goals
+            }
+        }
+        self.memory.decisions.append(decision)
+        return decision
+
     def _choose_next_url(self, current_url: str, links: List[str], current_analysis: PageAnalysis) -> str:
         logger.info("Choosing next URL with context")
         
-        # Get navigation history context
-        context_summary = self._get_context_summary()
-        
-        prompt = f"""As {self.persona.name}, choose the next most relevant link considering the navigation history:
+        prompt = f"""As {self.persona.name}, explain your navigation decision:
 
-        Your interests are: {', '.join(self.persona.interests)}
-        Your goals are: {', '.join(self.persona.goals)}
+        Your Profile:
+        - Interests: {', '.join(self.persona.interests)}
+        - Goals: {', '.join(self.persona.goals)}
         
-        Navigation History:
-        {context_summary}
-        
-        Current URL: {current_url}
-        Current Page Summary: {current_analysis.summary}
+        Current Page Analysis:
+        - URL: {current_url}
+        - Summary: {current_analysis.summary}
+        - Likes: {', '.join(current_analysis.likes)}
+        - Dislikes: {', '.join(current_analysis.dislikes)}
         
         Available links:
         {json.dumps(links[:50], indent=2)}
         
-        Based on the navigation history and your goals, choose the most relevant unvisited link.
-        Consider:
-        1. Links that complement previously gained information
-        2. Topics not yet explored but relevant to your goals
-        3. Avoid revisiting similar content
+        1. First explain your reasoning considering:
+           - How the current page meets your needs
+           - What information you're still looking for
+           - Why certain links appear promising
         
-        Explain your choice considering the navigation history, then provide just the chosen URL on a new line.
+        2. Then provide just the chosen URL on a new line.
         """
         
         try:
@@ -460,3 +475,42 @@ class PersonaAgent(BaseAgent):
     def _encode_image_for_claude(self, base64_image: str) -> str:
         """Prepare base64 image for Claude's image analysis"""
         return f"<image>{base64_image}</image>"
+
+    def _generate_final_conclusion(self) -> str:
+        """Generate a final conclusion summarizing the persona's experience"""
+        logger.info("Generating final conclusion")
+        
+        # Prepare summary data
+        visited_pages = len(self.memory.visited_urls)
+        coverage = self._calculate_information_coverage()
+        avg_satisfaction = sum(self.memory.satisfaction_scores.values()) / len(self.memory.satisfaction_scores) if self.memory.satisfaction_scores else 0
+        
+        prompt = f"""As {self.persona.name}, provide a concise final conclusion about your experience analyzing this website.
+
+        Your Profile:
+        - Interests: {', '.join(self.persona.interests)}
+        - Needs: {', '.join(self.persona.needs)}
+        - Goals: {', '.join(self.persona.goals)}
+
+        Analysis Summary:
+        - Pages Analyzed: {visited_pages}
+        - Information Coverage: {coverage:.2%}
+        - Average Satisfaction: {avg_satisfaction:.2%}
+        - Found CTAs: {', '.join(self.memory.found_ctas) if self.memory.found_ctas else 'None'}
+
+        Key Insights:
+        {json.dumps(dict(list(self.memory.key_insights.items())[:3]), indent=2)}
+
+        Provide a 3-4 sentence conclusion that:
+        1. Evaluates how well the website meets your needs and goals
+        2. Highlights key strengths and weaknesses
+        3. Makes a final recommendation
+        """
+
+        try:
+            conclusion = self.llm.invoke(prompt)
+            logger.info("Generated final conclusion")
+            return conclusion.strip()
+        except Exception as e:
+            logger.error(f"Error generating conclusion: {str(e)}")
+            return "Error generating conclusion"
