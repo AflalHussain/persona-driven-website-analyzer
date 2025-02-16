@@ -13,7 +13,7 @@ from src.utils.logger import setup_logging
 
 def load_persona(persona_name: str) -> Persona:
     """Load persona configuration from YAML file"""
-    with open('../config/personas.yaml', 'r') as f:
+    with open('../../config/personas.yaml', 'r') as f:
         personas = yaml.safe_load(f)
         
     if persona_name not in personas['personas']:
