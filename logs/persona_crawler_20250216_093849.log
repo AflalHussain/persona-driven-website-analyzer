@@ -1,0 +1,72 @@
+2025-02-16 09:38:49,982 - INFO - Starting persona web crawler
+2025-02-16 09:38:49,983 - INFO - Created persona: Tech-Savvy Bob
+2025-02-16 09:38:49,983 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
+2025-02-16 09:38:49,984 - INFO - Initializing WebCrawler
+2025-02-16 09:38:50,404 - INFO - Browser launched successfully
+2025-02-16 09:38:50,405 - INFO - PersonaAgent initialization completed
+2025-02-16 09:38:50,405 - INFO - Starting navigation from https://hsenidmobile.com with max_pages=5
+2025-02-16 09:38:50,405 - INFO - Processing page 1 of 5: https://hsenidmobile.com
+2025-02-16 09:38:50,405 - INFO - Starting page analysis for https://hsenidmobile.com
+2025-02-16 09:38:50,405 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-16 09:38:50,407 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-16 09:38:53,531 - INFO - Found 124 valid links on the page
+2025-02-16 09:38:53,531 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-16 09:38:54,555 - INFO - Screenshot captured successfully
+2025-02-16 09:38:54,564 - INFO - Content extraction completed in 4.16 seconds
+2025-02-16 09:38:54,564 - INFO - Content extracted successfully
+2025-02-16 09:38:54,564 - INFO - Sending unified analysis request to Claude
+2025-02-16 09:39:22,624 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-16 09:39:22,665 - INFO - Received analysis response
+2025-02-16 09:39:22,665 - INFO - Page analysis completed in 32.26 seconds
+2025-02-16 09:39:22,665 - INFO - Parsed analysis:
+2025-02-16 09:39:22,665 - INFO - {
+    "summary": "",
+    "likes": [
+        "Clean, professional visual design",
+        "Clear technical service categorization",
+        "Comprehensive solution descriptions",
+        "Easy navigation for technical users",
+        "Good balance of visuals and content"
+    ],
+    "dislikes": [
+        "Some sections could use more technical depth",
+        "Limited interactive elements",
+        "Could showcase more technical case studies",
+        "Hero section could be more dynamic",
+        "Navigation could be more granular for technical categories"
+    ],
+    "click_reasons": [
+        "Explore detailed technical specifications",
+        "Review case studies and implementation examples",
+        "Learn more about specific API capabilities",
+        "Investigate cloud solution offerings",
+        "Access technical documentation"
+    ],
+    "next_expectations": [
+        "Detailed technical documentation",
+        "Service implementation guides",
+        "API references and examples",
+        "Technical case studies",
+        "Pricing and deployment information"
+    ],
+    "overall_impression": "Strong enterprise technology website that would appeal to a tech-savvy professional seeking software solutions. Design and content effectively balance professional presentation with technical substance, though could benefit from more interactive elements and technical depth in some areas."
+}
+2025-02-16 09:39:22,665 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-16 09:39:22,665 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-16 09:39:25,349 - INFO - Found 124 valid links on the page
+2025-02-16 09:39:25,349 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-16 09:39:26,450 - INFO - Screenshot captured successfully
+2025-02-16 09:39:26,459 - INFO - Content extraction completed in 3.79 seconds
+2025-02-16 09:39:26,459 - INFO - Choosing next URL
+2025-02-16 09:39:26,802 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:26,804 - INFO - Retrying request to /v1/messages in 0.396662 seconds
+2025-02-16 09:39:27,566 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:27,568 - INFO - Retrying request to /v1/messages in 0.926496 seconds
+2025-02-16 09:39:28,989 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:28,991 - WARNING - Rate limit hit, retrying after delay...
+2025-02-16 09:39:40,439 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:40,441 - INFO - Retrying request to /v1/messages in 0.480909 seconds
+2025-02-16 09:39:41,962 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:41,964 - INFO - Retrying request to /v1/messages in 0.859364 seconds
+2025-02-16 09:39:43,846 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 09:39:43,849 - WARNING - Rate limit hit, retrying after delay...

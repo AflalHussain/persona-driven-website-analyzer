@@ -1,0 +1,122 @@
+2025-02-15 13:43:10,698 - INFO - Starting persona web crawler
+2025-02-15 13:43:10,698 - INFO - Created persona: Tech-Savvy Bob
+2025-02-15 13:43:10,698 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
+2025-02-15 13:43:10,698 - INFO - Setting up Claude LLM
+2025-02-15 13:43:10,700 - INFO - Initializing WebCrawler
+2025-02-15 13:43:11,010 - INFO - Browser launched successfully
+2025-02-15 13:43:11,010 - INFO - PersonaAgent initialization completed
+2025-02-15 13:43:11,010 - INFO - Starting navigation from https://hsenidmobile.com with max_pages=5
+2025-02-15 13:43:11,010 - INFO - Processing page 1 of 5: https://hsenidmobile.com
+2025-02-15 13:43:11,010 - INFO - Starting page analysis for https://hsenidmobile.com
+2025-02-15 13:43:11,010 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-15 13:43:11,013 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-15 13:43:15,619 - INFO - Found 124 valid links on the page
+2025-02-15 13:43:15,620 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-15 13:43:17,650 - INFO - Screenshot captured successfully
+2025-02-15 13:43:17,659 - INFO - Content extraction completed in 6.65 seconds
+2025-02-15 13:43:17,659 - INFO - Content extracted successfully
+2025-02-15 13:43:17,659 - INFO - Sending prompt to Claude for analysis
+2025-02-15 13:43:29,174 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:43:29,272 - INFO - Page analysis completed in 18.26 seconds
+2025-02-15 13:43:29,272 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-15 13:43:29,272 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-15 13:43:32,322 - INFO - Found 124 valid links on the page
+2025-02-15 13:43:32,322 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-15 13:43:33,300 - INFO - Screenshot captured successfully
+2025-02-15 13:43:33,310 - INFO - Content extraction completed in 4.04 seconds
+2025-02-15 13:43:33,310 - INFO - Choosing next URL
+2025-02-15 13:43:36,282 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:43:36,286 - INFO - Selected URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:36,287 - INFO - Selected next URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:36,287 - INFO - Processing page 2 of 5: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:36,287 - INFO - Starting page analysis for https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:36,288 - INFO - Extracting content from https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:36,288 - INFO - Validated URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:39,237 - INFO - Found 72 valid links on the page
+2025-02-15 13:43:39,237 - INFO - Capturing screenshot of https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:40,284 - INFO - Screenshot captured successfully
+2025-02-15 13:43:40,295 - INFO - Content extraction completed in 4.01 seconds
+2025-02-15 13:43:40,295 - INFO - Content extracted successfully
+2025-02-15 13:43:40,295 - INFO - Sending prompt to Claude for analysis
+2025-02-15 13:43:54,024 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:43:54,029 - INFO - Page analysis completed in 17.74 seconds
+2025-02-15 13:43:54,029 - INFO - Extracting content from https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:54,030 - INFO - Validated URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:56,972 - INFO - Found 72 valid links on the page
+2025-02-15 13:43:56,972 - INFO - Capturing screenshot of https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:43:58,254 - INFO - Screenshot captured successfully
+2025-02-15 13:43:58,262 - INFO - Content extraction completed in 4.23 seconds
+2025-02-15 13:43:58,262 - INFO - Choosing next URL
+2025-02-15 13:44:01,974 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:44:01,978 - INFO - Selected URL: https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:01,978 - INFO - Selected next URL: https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:01,978 - INFO - Processing page 3 of 5: https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:01,979 - INFO - Starting page analysis for https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:01,979 - INFO - Extracting content from https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:01,979 - INFO - Validated URL: https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:05,176 - INFO - Found 66 valid links on the page
+2025-02-15 13:44:05,176 - INFO - Capturing screenshot of https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:06,104 - INFO - Screenshot captured successfully
+2025-02-15 13:44:06,111 - INFO - Content extraction completed in 4.13 seconds
+2025-02-15 13:44:06,111 - INFO - Content extracted successfully
+2025-02-15 13:44:06,112 - INFO - Sending prompt to Claude for analysis
+2025-02-15 13:44:16,832 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:44:16,835 - INFO - Page analysis completed in 14.86 seconds
+2025-02-15 13:44:16,835 - INFO - Extracting content from https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:16,835 - INFO - Validated URL: https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:19,795 - INFO - Found 66 valid links on the page
+2025-02-15 13:44:19,795 - INFO - Capturing screenshot of https://hsenidmobile.com/download-data-science-and-ai-ml-solutions-datasheet/
+2025-02-15 13:44:20,714 - INFO - Screenshot captured successfully
+2025-02-15 13:44:20,722 - INFO - Content extraction completed in 3.89 seconds
+2025-02-15 13:44:20,722 - INFO - Choosing next URL
+2025-02-15 13:44:24,884 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:44:24,887 - INFO - Selected URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:24,887 - INFO - Selected next URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:24,887 - INFO - Processing page 4 of 5: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:24,887 - INFO - Starting page analysis for https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:24,887 - INFO - Extracting content from https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:24,887 - INFO - Validated URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:27,512 - INFO - Found 72 valid links on the page
+2025-02-15 13:44:27,512 - INFO - Capturing screenshot of https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:28,560 - INFO - Screenshot captured successfully
+2025-02-15 13:44:28,582 - INFO - Content extraction completed in 3.69 seconds
+2025-02-15 13:44:28,582 - INFO - Content extracted successfully
+2025-02-15 13:44:28,582 - INFO - Sending prompt to Claude for analysis
+2025-02-15 13:44:39,975 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:44:39,979 - INFO - Page analysis completed in 15.09 seconds
+2025-02-15 13:44:39,979 - INFO - Extracting content from https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:39,980 - INFO - Validated URL: https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:42,611 - INFO - Found 72 valid links on the page
+2025-02-15 13:44:42,611 - INFO - Capturing screenshot of https://hsenidmobile.com/data-science-and-aiml-solution/
+2025-02-15 13:44:43,721 - INFO - Screenshot captured successfully
+2025-02-15 13:44:43,728 - INFO - Content extraction completed in 3.75 seconds
+2025-02-15 13:44:43,729 - INFO - Choosing next URL
+2025-02-15 13:44:47,348 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:44:47,351 - INFO - Selected URL: https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:47,352 - INFO - Selected next URL: https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:47,352 - INFO - Processing page 5 of 5: https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:47,352 - INFO - Starting page analysis for https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:47,353 - INFO - Extracting content from https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:47,353 - INFO - Validated URL: https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:50,605 - INFO - Found 70 valid links on the page
+2025-02-15 13:44:50,605 - INFO - Capturing screenshot of https://hsenidmobile.com/white-papers/
+2025-02-15 13:44:51,583 - INFO - Screenshot captured successfully
+2025-02-15 13:44:51,590 - INFO - Content extraction completed in 4.24 seconds
+2025-02-15 13:44:51,590 - INFO - Content extracted successfully
+2025-02-15 13:44:51,590 - INFO - Sending prompt to Claude for analysis
+2025-02-15 13:45:02,503 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:45:02,507 - INFO - Page analysis completed in 15.15 seconds
+2025-02-15 13:45:02,507 - INFO - Extracting content from https://hsenidmobile.com/white-papers/
+2025-02-15 13:45:02,508 - INFO - Validated URL: https://hsenidmobile.com/white-papers/
+2025-02-15 13:45:04,937 - INFO - Found 70 valid links on the page
+2025-02-15 13:45:04,937 - INFO - Capturing screenshot of https://hsenidmobile.com/white-papers/
+2025-02-15 13:45:05,853 - INFO - Screenshot captured successfully
+2025-02-15 13:45:05,861 - INFO - Content extraction completed in 3.35 seconds
+2025-02-15 13:45:05,861 - INFO - Choosing next URL
+2025-02-15 13:45:09,270 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-15 13:45:09,274 - INFO - Selected URL: https://hsenidmobile.com/whitepaper-ai-ml/
+2025-02-15 13:45:09,275 - INFO - Selected next URL: https://hsenidmobile.com/whitepaper-ai-ml/
+2025-02-15 13:45:09,275 - INFO - Navigation completed. Generating report.
+2025-02-15 13:45:09,275 - INFO - Generating final report
+2025-02-15 13:45:09,276 - INFO - Report generated with 5 pages analyzed
+2025-02-15 13:45:09,278 - INFO - Report saved to persona_analysis_report.json

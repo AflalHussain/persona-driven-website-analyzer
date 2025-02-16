@@ -1,0 +1,20 @@
+2025-02-16 11:28:06,776 - INFO - Starting persona web crawler
+2025-02-16 11:28:06,776 - INFO - Created persona: Data Engineer Dave
+2025-02-16 11:28:06,777 - INFO - Initializing PersonaAgent for persona: Data Engineer Dave
+2025-02-16 11:28:06,778 - INFO - Initializing WebCrawler
+2025-02-16 11:28:07,126 - INFO - Browser launched successfully
+2025-02-16 11:28:07,126 - INFO - PersonaAgent initialization completed
+2025-02-16 11:28:07,126 - INFO - Starting navigation from https://databricks.com with max_pages=5
+2025-02-16 11:28:07,126 - INFO - Processing page 1 of 5: https://databricks.com
+2025-02-16 11:28:07,126 - INFO - Extracting content from https://databricks.com
+2025-02-16 11:28:07,128 - INFO - Validated URL: https://databricks.com
+2025-02-16 11:28:18,653 - INFO - Found 250 valid links on the page
+2025-02-16 11:28:18,653 - INFO - Capturing screenshot of https://databricks.com
+2025-02-16 11:28:25,151 - INFO - Screenshot captured successfully
+2025-02-16 11:28:25,202 - INFO - Content extraction completed in 18.08 seconds
+2025-02-16 11:28:25,202 - INFO - Starting page analysis for https://databricks.com
+2025-02-16 11:28:25,202 - INFO - Content extracted successfully
+2025-02-16 11:28:25,208 - INFO - Sending optimized analysis request
+2025-02-16 11:28:25,208 - INFO - Attempt 1 of 2
+2025-02-16 11:28:25,208 - WARNING - Error on attempt 1: Invalid input type <class 'dict'>. Must be a PromptValue, str, or list of BaseMessages.
+2025-02-16 11:28:27,210 - INFO - Waiting 18.00 seconds before next API call

@@ -1,0 +1,17 @@
+2025-02-15 13:11:31,072 - INFO - Starting persona web crawler
+2025-02-15 13:11:31,072 - INFO - Created persona: Tech-Savvy Bob
+2025-02-15 13:11:31,072 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
+2025-02-15 13:11:31,072 - INFO - Setting up Claude LLM
+2025-02-15 13:11:31,073 - INFO - Initializing WebCrawler
+2025-02-15 13:11:31,387 - INFO - Browser launched successfully
+2025-02-15 13:11:31,387 - INFO - PersonaAgent initialization completed
+2025-02-15 13:11:31,387 - INFO - Starting navigation from https://example.com with max_pages=5
+2025-02-15 13:11:31,387 - INFO - Processing page 1 of 5: https://example.com
+2025-02-15 13:11:31,387 - INFO - Starting page analysis for https://example.com
+2025-02-15 13:11:31,387 - INFO - Extracting content from https://example.com
+2025-02-15 13:11:32,553 - INFO - Found 1 links on the page
+2025-02-15 13:11:32,553 - INFO - Capturing screenshot of https://example.com
+2025-02-15 13:11:33,679 - INFO - Screenshot captured successfully
+2025-02-15 13:11:33,685 - INFO - Content extraction completed in 2.30 seconds
+2025-02-15 13:11:33,685 - INFO - Content extracted successfully
+2025-02-15 13:11:33,685 - INFO - Sending prompt to Claude for analysis

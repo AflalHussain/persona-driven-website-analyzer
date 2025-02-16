@@ -1,0 +1,53 @@
+2025-02-16 01:08:37,709 - INFO - Starting persona web crawler
+2025-02-16 01:08:37,710 - INFO - Created persona: Tech-Savvy Bob
+2025-02-16 01:08:37,710 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
+2025-02-16 01:08:37,710 - INFO - Setting up Claude LLM
+2025-02-16 01:08:37,711 - INFO - Initializing WebCrawler
+2025-02-16 01:08:38,145 - INFO - Browser launched successfully
+2025-02-16 01:08:38,145 - INFO - PersonaAgent initialization completed
+2025-02-16 01:08:38,145 - INFO - Starting navigation from https://hsenidmobile.com with max_pages=5
+2025-02-16 01:08:38,145 - INFO - Processing page 1 of 5: https://hsenidmobile.com
+2025-02-16 01:08:38,146 - INFO - Starting page analysis for https://hsenidmobile.com
+2025-02-16 01:08:38,146 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-16 01:08:38,148 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-16 01:08:42,494 - INFO - Found 124 valid links on the page
+2025-02-16 01:08:42,494 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-16 01:08:43,521 - INFO - Screenshot captured successfully
+2025-02-16 01:08:43,536 - INFO - Content extraction completed in 5.39 seconds
+2025-02-16 01:08:43,536 - INFO - Content extracted successfully
+2025-02-16 01:08:43,536 - INFO - Sending prompt to Claude for analysis
+2025-02-16 01:09:12,853 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-16 01:09:12,893 - INFO - Page analysis completed in 34.75 seconds
+2025-02-16 01:09:12,893 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-16 01:09:12,893 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-16 01:09:15,851 - INFO - Found 124 valid links on the page
+2025-02-16 01:09:15,851 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-16 01:09:17,042 - INFO - Screenshot captured successfully
+2025-02-16 01:09:17,057 - INFO - Content extraction completed in 4.16 seconds
+2025-02-16 01:09:17,057 - INFO - Choosing next URL
+2025-02-16 01:09:17,416 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:17,418 - INFO - Retrying request to /v1/messages in 0.420979 seconds
+2025-02-16 01:09:18,576 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:18,578 - INFO - Retrying request to /v1/messages in 0.769260 seconds
+2025-02-16 01:09:20,368 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:20,371 - ERROR - Error in URL selection: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': 'This request would exceed your organization’s rate limit of 20,000 input tokens per minute. For details, refer to: https://docs.anthropic.com/en/api/rate-limits; see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase.'}}
+2025-02-16 01:09:20,371 - INFO - Falling back to first available link
+2025-02-16 01:09:20,372 - INFO - Selected next URL: https://hsenidmobile.com#content
+2025-02-16 01:09:20,372 - INFO - Processing page 2 of 5: https://hsenidmobile.com#content
+2025-02-16 01:09:20,372 - INFO - Starting page analysis for https://hsenidmobile.com#content
+2025-02-16 01:09:20,372 - INFO - Extracting content from https://hsenidmobile.com#content
+2025-02-16 01:09:20,373 - INFO - Validated URL: https://hsenidmobile.com#content
+2025-02-16 01:09:27,716 - INFO - Found 144 valid links on the page
+2025-02-16 01:09:27,716 - INFO - Capturing screenshot of https://hsenidmobile.com#content
+2025-02-16 01:09:29,015 - INFO - Screenshot captured successfully
+2025-02-16 01:09:29,054 - INFO - Content extraction completed in 8.68 seconds
+2025-02-16 01:09:29,054 - INFO - Content extracted successfully
+2025-02-16 01:09:29,054 - INFO - Sending prompt to Claude for analysis
+2025-02-16 01:09:31,187 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:31,188 - INFO - Retrying request to /v1/messages in 0.402389 seconds
+2025-02-16 01:09:33,470 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:33,472 - INFO - Retrying request to /v1/messages in 0.807354 seconds
+2025-02-16 01:09:34,960 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:09:34,962 - ERROR - Error in page analysis: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': 'This request would exceed your organization’s rate limit of 20,000 input tokens per minute. For details, refer to: https://docs.anthropic.com/en/api/rate-limits; see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase.'}}
+2025-02-16 01:09:34,963 - INFO - Extracting content from https://hsenidmobile.com#content
+2025-02-16 01:09:34,963 - INFO - Validated URL: https://hsenidmobile.com#content

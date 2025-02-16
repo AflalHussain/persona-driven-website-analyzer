@@ -1,0 +1,37 @@
+2025-02-16 01:37:23,288 - INFO - Starting persona web crawler
+2025-02-16 01:37:23,288 - INFO - Created persona: Tech-Savvy Bob
+2025-02-16 01:37:23,288 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
+2025-02-16 01:37:23,290 - INFO - Initializing WebCrawler
+2025-02-16 01:37:25,271 - INFO - Browser launched successfully
+2025-02-16 01:37:25,271 - INFO - PersonaAgent initialization completed
+2025-02-16 01:37:25,272 - INFO - Starting navigation from https://hsenidmobile.com with max_pages=5
+2025-02-16 01:37:25,272 - INFO - Processing page 1 of 5: https://hsenidmobile.com
+2025-02-16 01:37:25,272 - INFO - Starting page analysis for https://hsenidmobile.com
+2025-02-16 01:37:25,272 - INFO - Extracting content from https://hsenidmobile.com
+2025-02-16 01:37:25,278 - INFO - Validated URL: https://hsenidmobile.com
+2025-02-16 01:37:29,658 - INFO - Found 124 valid links on the page
+2025-02-16 01:37:29,658 - INFO - Capturing screenshot of https://hsenidmobile.com
+2025-02-16 01:37:30,950 - INFO - Screenshot captured successfully
+2025-02-16 01:37:30,969 - INFO - Content extraction completed in 5.70 seconds
+2025-02-16 01:37:30,970 - INFO - Content extracted successfully
+2025-02-16 01:37:30,970 - INFO - Getting content analysis
+2025-02-16 01:37:40,505 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-16 01:37:40,545 - INFO - Getting visual analysis
+2025-02-16 01:38:05,123 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-02-16 01:38:05,129 - INFO - Getting combined analysis
+2025-02-16 01:38:05,483 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:05,485 - INFO - Retrying request to /v1/messages in 0.453758 seconds
+2025-02-16 01:38:06,454 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:06,456 - INFO - Retrying request to /v1/messages in 0.933149 seconds
+2025-02-16 01:38:08,364 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:08,366 - WARNING - Rate limit hit, retrying after delay...
+2025-02-16 01:38:19,390 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:19,392 - INFO - Retrying request to /v1/messages in 0.381892 seconds
+2025-02-16 01:38:20,209 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:20,211 - INFO - Retrying request to /v1/messages in 0.773657 seconds
+2025-02-16 01:38:21,991 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:21,994 - WARNING - Rate limit hit, retrying after delay...
+2025-02-16 01:38:33,809 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:33,811 - INFO - Retrying request to /v1/messages in 0.429031 seconds
+2025-02-16 01:38:35,231 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 429 Too Many Requests"
+2025-02-16 01:38:35,234 - INFO - Retrying request to /v1/messages in 0.801449 seconds
