@@ -67,7 +67,9 @@ class PersonaAgent(BaseAgent):
         """Update navigation memory with new page analysis"""
         self.memory.visited_urls.append(url)
         self.memory.page_summaries[url] = analysis.summary
-        
+        self.memory.overall_impressions[url] = analysis.overall_impression
+        self.memory.next_expectations[url] = analysis.next_expectations
+        self.memory.visual_analysis[url] = analysis.visual_analysis
         self.memory.key_insights[url] = [
             *analysis.likes,
             *analysis.dislikes,
@@ -108,7 +110,10 @@ class PersonaAgent(BaseAgent):
         
         for url in recent_pages:
             summary = self.memory.page_summaries.get(url, '')
+            next_expectations = self.memory.next_expectations.get(url, [])
+            overall_impression = self.memory.overall_impressions.get(url, '')
             insights = self.memory.key_insights.get(url, [])
+            visual_analysis = self.memory.visual_analysis.get(url, [])
             relevance = self.memory.topic_relevance.get(url, 0.0)
             
             context_summary.append(f"""
@@ -116,6 +121,8 @@ class PersonaAgent(BaseAgent):
             Relevance Score: {relevance:.2f}
             Summary: {summary}
             Key Insights: {', '.join(insights[:3])}
+            Visual Analysis: {', '.join(visual_analysis)}
+            Overall Impression: {overall_impression}
             """)
         
         return "\n".join(context_summary)
@@ -181,7 +188,7 @@ class PersonaAgent(BaseAgent):
 
                 VISUAL BRIEF
                 - Key layout elements
-                - Main visual features
+                - Main visual features like color, font, etc
                 - Navigation elements
                 
                 CONTENT SUMMARY
@@ -237,11 +244,16 @@ class PersonaAgent(BaseAgent):
                 'dislikes': [],
                 'click_reasons': [],
                 'next_expectations': [],
+                'visual_analysis': [],
                 'overall_impression': ''
             }
             
             current_section = None
             for section in sections:
+                if section.startswith('VISUAL BRIEF'):
+                    # Skip the "VISUAL BRIEF" header and just take the content
+                    parsed['visual_analysis'] = [x.strip('- ') for x in section.split('\n')[1:] if x.strip()]
+                     
                 if 'FINAL ASSESSMENT' in section:
                     current_section = 'final'
                     continue
@@ -275,6 +287,7 @@ class PersonaAgent(BaseAgent):
                 dislikes=parsed.get('dislikes', []),
                 click_reasons=parsed.get('click_reasons', []),
                 next_expectations=parsed.get('next_expectations', []),
+                visual_analysis=parsed.get('visual_analysis', []),
                 overall_impression=parsed.get('overall_impression', '')
             )
             
@@ -345,8 +358,9 @@ class PersonaAgent(BaseAgent):
                     likes=self.memory.key_insights.get(url, [])[:3],
                     dislikes=self.memory.key_insights.get(url, [])[3:6],
                     click_reasons=self.memory.key_insights.get(url, [])[6:8],
-                    next_expectations=[],
-                    overall_impression=''
+                    next_expectations=self.memory.next_expectations.get(url, []),
+                    visual_analysis=self.memory.visual_analysis.get(url, []),
+                    overall_impression=self.memory.overall_impressions.get(url, ''),
                 ) for url in self.memory.visited_urls],
                 navigation_path=self.memory.navigation_path,
                 exit_reason=exit_reason,

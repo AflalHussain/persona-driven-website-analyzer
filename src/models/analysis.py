@@ -10,6 +10,7 @@ class PageAnalysis:
     dislikes: List[str]
     click_reasons: List[str]
     next_expectations: List[str]
+    visual_analysis: List[str]
     overall_impression: str
 
 @dataclass
@@ -28,6 +29,9 @@ class NavigationMemory:
     """Memory management for navigation"""
     visited_urls: List[str] = field(default_factory=list)
     page_summaries: Dict[str, str] = field(default_factory=dict)
+    next_expectations: Dict[str, List[str]] = field(default_factory=dict)
+    visual_analysis: Dict[str, List[str]] = field(default_factory=dict)
+    overall_impressions: Dict[str, str] = field(default_factory=dict)
     key_insights: Dict[str, List[str]] = field(default_factory=dict)
     topic_relevance: Dict[str, float] = field(default_factory=dict)
     navigation_path: List[Dict[str, str]] = field(default_factory=list)
