@@ -4,6 +4,8 @@ import yaml
 import json
 import argparse
 from dotenv import load_dotenv
+from urllib.parse import urlparse
+from datetime import datetime
 
 # Add project root to Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -50,11 +52,17 @@ def main():
         # Initialize agent
         agent = PersonaAgent(persona)
         
+        # Extract domain from URL for filename
+        domain = urlparse(args.url).netloc.replace('www.', '')
+        
+        # Get timestamp
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        
         # Start website analysis
         report = agent.navigate(args.url, max_pages=args.max_pages)
         
-        # Save report
-        output_file = f"reports/analysis_report_{persona.name.lower().replace(' ', '_')}.json"
+        # Save report with new filename format
+        output_file = f"reports/{domain}_{persona.name.lower().replace(' ', '_')}_{timestamp}.json"
         os.makedirs('reports', exist_ok=True)
         
         with open(output_file, 'w') as f:
