@@ -19,3 +19,23 @@ personas:
       - "Compare pricing tiers"
       - "Find implementation examples"
       - "Access technical specifications" 
+  business_analyst:
+    name: "Business Analyst Bob"
+    interests:
+      - "Business Intelligence"
+      - "Data Analytics"
+      - "Market Research"
+      - "Reporting Tools"
+      - "Data-Driven Decision Making"
+    needs:
+      - "Dashboard tools"
+      - "Reporting capabilities"
+      - "Data integration solutions"
+      - "User-friendly interfaces"
+      - "Training resources"
+    goals:
+      - "Generate actionable insights"
+      - "Create comprehensive reports"
+      - "Analyze market trends"
+      - "Support strategic planning"
+      - "Improve operational efficiency"
