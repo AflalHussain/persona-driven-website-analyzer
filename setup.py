@@ -9,12 +9,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="website-analyzer",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Aflal Hussain",
+    author_email="aflalibnhussain@gmail.com",
     description="A persona-driven website analysis system",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/website-analyzer",
+    url="https://github.com/AflalHussain/Persona-driven-web-crawler-and-analyzer",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
