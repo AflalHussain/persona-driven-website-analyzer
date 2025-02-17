@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin, urlunsplit
 import validators
 import logging
 
@@ -33,4 +33,39 @@ def get_domain(url: str) -> str:
         return parsed.netloc
     except Exception as e:
         logger.error(f"Error extracting domain from URL {url}: {str(e)}")
-        return "" 
+        return ""
+
+def is_same_page_link(url1: str, url2: str) -> bool:
+    """Check if two URLs point to the same page (ignoring hash/fragment)"""
+    try:
+        parsed1 = urlparse(url1)
+        parsed2 = urlparse(url2)
+
+        # Normalize paths by stripping trailing slashes
+        path1 = parsed1.path.rstrip('/')
+        path2 = parsed2.path.rstrip('/')
+        
+        # Compare everything except fragment
+        return (parsed1.scheme == parsed2.scheme and
+                parsed1.netloc == parsed2.netloc and
+                path1== path2 and
+                parsed1.params == parsed2.params and
+                parsed1.query == parsed2.query)
+    except Exception as e:
+        logger.error(f"Error comparing URLs {url1} and {url2}: {str(e)}")
+        return False
+
+def get_url_without_fragment(url: str) -> str:
+    """Remove fragment/hash from URL"""
+    try:
+        parsed = urlparse(url)
+        return urlunsplit((
+            parsed.scheme,
+            parsed.netloc,
+            parsed.path,
+            parsed.query,
+            ''  # Empty fragment
+        ))
+    except Exception as e:
+        logger.error(f"Error cleaning URL {url}: {str(e)}")
+        return url 

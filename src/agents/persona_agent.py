@@ -11,6 +11,7 @@ from ..models.report import AnalysisReport
 from ..crawlers.web_crawler import WebCrawler
 from ..llm.claude_client import RateLimitedLLM
 from .base_agent import BaseAgent
+from ..utils.url_validator import is_same_page_link
 
 logger = logging.getLogger(__name__)
 
@@ -163,6 +164,13 @@ class PersonaAgent(BaseAgent):
             else:
                 image_content = "[Screenshot analysis skipped based on persona goals]"
             
+            # Include section content in analysis if available
+            section_content = ""
+            if content.get('section_links'):
+                section_content = "\n\nPage Sections:\n"
+                for anchor, text in content['section_links'].items():
+                    section_content += f"\nSection {anchor}:\n{text[:200]}...\n"
+            
             # Create focused prompt based on persona
             interests_str = ', '.join(self.persona.interests[:3])  # Limit to top 3
             needs_str = ', '.join(self.persona.needs[:3])
@@ -183,6 +191,8 @@ class PersonaAgent(BaseAgent):
                 
                 Visual:
                 {image_content}
+                
+                {section_content}
                 
                 Provide CONCISE analysis:
 
@@ -389,6 +399,16 @@ class PersonaAgent(BaseAgent):
         return decision
 
     def _choose_next_url(self, current_url: str, links: List[str], current_analysis: PageAnalysis) -> str:
+        # Filter out same-page links before choosing next URL
+        external_links = [
+            link for link in links 
+            if not is_same_page_link(link, current_url)
+        ]
+        
+        if not external_links:
+            logger.info("No external links found for navigation")
+            return None
+            
         logger.info("Choosing next URL with context")
         
         prompt = f"""As {self.persona.name}, explain your navigation decision:
@@ -404,7 +424,7 @@ class PersonaAgent(BaseAgent):
         - Dislikes: {', '.join(current_analysis.dislikes)}
         
         Available links:
-        {json.dumps(links[:50], indent=2)}
+        {json.dumps(external_links[:50], indent=2)}
         
         1. First explain your reasoning considering:
            - How the current page meets your needs
@@ -418,14 +438,14 @@ class PersonaAgent(BaseAgent):
             response = self.llm.invoke(prompt)
             url = response.strip().split('\n')[-1].strip()
             
-            if url in links and url not in self.memory.visited_urls:
+            if url in external_links and url not in self.memory.visited_urls:
                 logger.info(f"Selected new URL: {url}")
                 return url
             else:
                 logger.warning("Selected URL invalid or already visited")
                 
                 # Find first unvisited valid link
-                for link in links:
+                for link in external_links:
                     if link not in self.memory.visited_urls:
                         return link
                         
