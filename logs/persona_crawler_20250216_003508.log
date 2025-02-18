@@ -1,8 +1,0 @@
-2025-02-16 00:35:08,851 - INFO - Starting persona web crawler
-2025-02-16 00:35:08,851 - INFO - Created persona: Tech-Savvy Bob
-2025-02-16 00:35:08,851 - INFO - Initializing PersonaAgent for persona: Tech-Savvy Bob
-2025-02-16 00:35:08,851 - INFO - Setting up Claude LLM
-2025-02-16 00:35:08,853 - INFO - Initializing WebCrawler
-2025-02-16 00:35:10,895 - INFO - Browser launched successfully
-2025-02-16 00:35:10,896 - INFO - PersonaAgent initialization completed
-2025-02-16 00:35:10,896 - ERROR - Error in main execution: 'PersonaAgent' object has no attribute 'navigate'

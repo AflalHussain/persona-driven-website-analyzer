@@ -1,6 +1,0 @@
-2025-02-16 13:21:08,054 - INFO - Starting persona web crawler
-2025-02-16 13:21:08,054 - INFO - Created persona: Data Engineer Dave
-2025-02-16 13:21:08,054 - INFO - Initializing PersonaAgent for persona: Data Engineer Dave
-2025-02-16 13:21:08,055 - INFO - Initializing WebCrawler
-2025-02-16 13:21:10,354 - INFO - Browser launched successfully
-2025-02-16 13:21:10,354 - ERROR - Error in main execution: __init__() got an unexpected keyword argument 'k'

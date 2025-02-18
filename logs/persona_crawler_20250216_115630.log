@@ -1,7 +1,0 @@
-2025-02-16 11:56:30,560 - INFO - Starting persona web crawler
-2025-02-16 11:56:30,561 - INFO - Created persona: Data Engineer Dave
-2025-02-16 11:56:30,561 - INFO - Initializing PersonaAgent for persona: Data Engineer Dave
-2025-02-16 11:56:30,565 - ERROR - Error in main execution: 1 validation error for ChatAnthropic
-anthropic_api_key
-  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
-    For further information visit https://errors.pydantic.dev/2.10/v/string_type
