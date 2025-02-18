@@ -143,4 +143,3 @@ async def run_focus_group_analysis(task_id: str, request: AnalysisRequest):
    - Storage cleanup
    - Result compression
 
-[Previous sections from v2 remain unchanged...]

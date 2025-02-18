@@ -193,4 +193,3 @@ partial_report: Dict[str, Any] = {
    - Trend analysis
    - Comparative reports
 
-[Previous sections from v1 remain unchanged...] 
