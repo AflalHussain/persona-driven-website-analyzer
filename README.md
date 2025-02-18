@@ -72,7 +72,7 @@ additional_details:
 
 2. Run the focus group analysis:
 ```bash
-python run_focus_group_analysis.py --url https://example.com --template templates/developer_template.yaml --variations 5
+python run_focus_group_analysis.py --url  https://www.w3schools.com/ --template templates/developer_template.yaml --variations 2
 ```
 
 Options:
