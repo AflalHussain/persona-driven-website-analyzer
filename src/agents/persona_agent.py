@@ -8,7 +8,7 @@ import time
 from ..models.persona import Persona
 from ..models.analysis import PageAnalysis, NavigationMemory, ExitCriteria
 from ..models.report import AnalysisReport
-from ..crawlers.web_crawler import WebCrawler
+from ..crawlers.web_crawler import WebCrawler, CloudflareDetectedException
 from ..llm.claude_client import RateLimitedLLM
 from .base_agent import BaseAgent
 from ..utils.url_validator import is_same_page_link
@@ -20,7 +20,7 @@ class PersonaAgent(BaseAgent):
         logger.info(f"Initializing PersonaAgent for persona: {persona.name}")
         self.persona = persona
         self.llm = RateLimitedLLM(os.getenv("ANTHROPIC_API_KEY"))
-        self.crawler = WebCrawler()
+        self.crawler = None
         self.memory = NavigationMemory()
         self.exit_criteria = ExitCriteria()
         self.context_window = 3
@@ -313,90 +313,88 @@ class PersonaAgent(BaseAgent):
                 overall_impression="Analysis failed"
             )
 
-    def navigate(self, start_url: str, max_pages: int = 100) -> Dict[str, Any]:
+    async def navigate(self, start_url: str, max_pages: int = 5) -> Dict[str, Any]:
         """Navigate through website and generate analysis report"""
         logger.info(f"Starting navigation from {start_url}")
-        self.crawler.base_url = start_url
-        current_url = start_url
-        exit_reason = ""
         
-        try:
-            for page_num in range(max_pages):
-                logger.info(f"Processing page {page_num + 1} of {max_pages}: {current_url}")
+        # Initialize WebCrawler within async context
+        async with WebCrawler() as crawler:
+            self.crawler = crawler
+            try:
+                current_url = start_url
+                exit_reason = ""
                 
-                content = self.crawler.extract_content(current_url)
-                should_stop, exit_reason = self.should_exit(content)
-                
-                analysis = self.analyze_page(current_url, content)
-                self._update_memory(current_url, analysis)
-                
-                if should_stop:
-                    logger.info(f"Exiting navigation: {exit_reason}")
-                    break
-                
-                # Update consecutive irrelevant pages counter
-                if self.memory.topic_relevance.get(current_url, 0) < 0.3:
-                    self.memory.consecutive_irrelevant_pages += 1
-                else:
-                    self.memory.consecutive_irrelevant_pages = 0
-                
-                if not content['links']:
-                    logger.info("No links found on page. Ending navigation.")
-                    exit_reason = "No further links to explore"
-                    break
+                while len(self.memory.visited_urls) < max_pages:
+                    try:
+                        logger.info(f"Processing page {len(self.memory.visited_urls) + 1} of {max_pages}: {current_url}")
+                        current_content = await self.crawler.extract_content(current_url)
+                    except CloudflareDetectedException as e:
+                        logger.error(str(e))
+                        return {
+                            "error": "cloudflare_detected",
+                            "message": str(e),
+                            "url": current_url,
+                            "timestamp": datetime.now().isoformat(),
+                            "pages_analyzed": self.memory.visited_urls,
+                            "status": "incomplete"
+                        }
                     
-                next_url = self._choose_next_url(current_url, content['links'], analysis)
-                if not next_url:
-                    logger.info("No suitable next URL found. Ending navigation.")
-                    exit_reason = "No relevant links to explore"
-                    break
+                    should_stop, exit_reason = self.should_exit(current_content)
                     
-                current_url = next_url
+                    analysis = self.analyze_page(current_url, current_content)
+                    self._update_memory(current_url, analysis)
+                    
+                    if should_stop:
+                        logger.info(f"Exiting navigation: {exit_reason}")
+                        break
+                    
+                    # Update consecutive irrelevant pages counter
+                    if self.memory.topic_relevance.get(current_url, 0) < 0.3:
+                        self.memory.consecutive_irrelevant_pages += 1
+                    else:
+                        self.memory.consecutive_irrelevant_pages = 0
+                    
+                    if not current_content['links']:
+                        logger.info("No links found on page. Ending navigation.")
+                        exit_reason = "No further links to explore"
+                        break
+                        
+                    next_url = self._choose_next_url(current_url, current_content['links'], analysis)
+                    if not next_url:
+                        logger.info("No suitable next URL found. Ending navigation.")
+                        exit_reason = "No relevant links to explore"
+                        break
+                        
+                    current_url = next_url
                 
-        except Exception as e:
-            logger.error(f"Error during navigation: {str(e)}")
-            exit_reason = f"Error: {str(e)}"
-            
-        finally:
-            final_conclusion = self._generate_final_conclusion()
-            # Generate report even if navigation was incomplete
-            report = AnalysisReport(
-                persona_name=self.persona.name,
-                start_url=start_url,
-                pages_analyzed=[PageAnalysis(
-                    url=url,
-                    summary=self.memory.page_summaries.get(url, ''),
-                    likes=self.memory.key_insights.get(url, [])[:3],
-                    dislikes=self.memory.key_insights.get(url, [])[3:6],
-                    click_reasons=self.memory.key_insights.get(url, [])[6:8],
-                    next_expectations=self.memory.next_expectations.get(url, []),
-                    visual_analysis=self.memory.visual_analysis.get(url, []),
-                    overall_impression=self.memory.overall_impressions.get(url, ''),
-                ) for url in self.memory.visited_urls],
-                navigation_path=self.memory.navigation_path,
-                exit_reason=exit_reason,
-                information_coverage=self._calculate_information_coverage(),
-                found_ctas=self.memory.found_ctas,
-                final_conclusion=final_conclusion
-            )
-            
-            return report.to_dict() 
+                final_conclusion = self._generate_final_conclusion()
+                # Generate report even if navigation was incomplete
+                report = AnalysisReport(
+                    persona_name=self.persona.name,
+                    start_url=start_url,
+                    pages_analyzed=[PageAnalysis(
+                        url=url,
+                        summary=self.memory.page_summaries.get(url, ''),
+                        likes=self.memory.key_insights.get(url, [])[:3],
+                        dislikes=self.memory.key_insights.get(url, [])[3:6],
+                        click_reasons=self.memory.key_insights.get(url, [])[6:8],
+                        next_expectations=self.memory.next_expectations.get(url, []),
+                        visual_analysis=self.memory.visual_analysis.get(url, []),
+                        overall_impression=self.memory.overall_impressions.get(url, ''),
+                    ) for url in self.memory.visited_urls],
+                    navigation_path=self.memory.navigation_path,
+                    exit_reason=exit_reason,
+                    information_coverage=self._calculate_information_coverage(),
+                    found_ctas=self.memory.found_ctas,
+                    final_conclusion=final_conclusion
+                )
+                
+                return report.to_dict()
+                
+            except Exception as e:
+                logger.error(f"Error during navigation: {str(e)}")
+                raise
         
-    def _log_decision(self, decision_type: str, context: str, reasoning: str) -> Dict[str, str]:
-        """Log a decision with context and reasoning"""
-        decision = {
-            "timestamp": datetime.now().isoformat(),
-            "type": decision_type,
-            "context": context,
-            "reasoning": reasoning,
-            "persona_attributes": {
-                "interests": self.persona.interests,
-                "needs": self.persona.needs,
-                "goals": self.persona.goals
-            }
-        }
-        self.memory.decisions.append(decision)
-        return decision
 
     def _choose_next_url(self, current_url: str, links: List[str], current_analysis: PageAnalysis) -> str:
         # Filter out same-page links before choosing next URL
@@ -411,11 +409,21 @@ class PersonaAgent(BaseAgent):
             
         logger.info("Choosing next URL with context")
         
+        # Format visited URLs with their summaries for context
+        visited_context = ""
+        if self.memory.visited_urls:
+            visited_context = "Previously visited pages:\n"
+            for url in self.memory.visited_urls:
+                summary = self.memory.page_summaries.get(url, "No summary available")
+                impression = self.memory.overall_impressions.get(url, "No impression available")
+                visited_context += f"- {url}\n  Summary: {summary}\n  Impression: {impression}\n"
+        
         prompt = f"""As {self.persona.name}, explain your navigation decision:
 
         Your Profile:
         - Interests: {', '.join(self.persona.interests)}
         - Goals: {', '.join(self.persona.goals)}
+        - Needs: {', '.join(self.persona.needs)}
         
         Current Page Analysis:
         - URL: {current_url}
@@ -423,30 +431,38 @@ class PersonaAgent(BaseAgent):
         - Likes: {', '.join(current_analysis.likes)}
         - Dislikes: {', '.join(current_analysis.dislikes)}
         
-        Available links:
-        {json.dumps(external_links[:50], indent=2)}
+        {visited_context}
         
-        1. First explain your reasoning considering:
-           - How the current page meets your needs
-           - What information you're still looking for
-           - Why certain links appear promising
+        Available unvisited links:
+        {json.dumps([link for link in external_links if link not in self.memory.visited_urls], indent=2)}
         
-        2. Then provide just the chosen URL on a new line.
+        Already visited links (avoid these):
+        {json.dumps(list(self.memory.visited_urls), indent=2)}
+        
+        Based on:
+        1. Your goals and needs
+        2. What you've learned from visited pages
+        3. What information you're still missing
+        
+        Choose the most promising unvisited link that will help achieve your goals.
+        
+        First explain your reasoning, then provide just the chosen URL on a new line.
         """
         
         try:
             response = self.llm.invoke(prompt)
             url = response.strip().split('\n')[-1].strip()
-            
+            # Verify the chosen URL is valid and unvisited
             if url in external_links and url not in self.memory.visited_urls:
                 logger.info(f"Selected new URL: {url}")
                 return url
             else:
                 logger.warning("Selected URL invalid or already visited")
                 
-                # Find first unvisited valid link
+                # Find first unvisited valid link as fallback
                 for link in external_links:
                     if link not in self.memory.visited_urls:
+                        logger.info(f"Falling back to first unvisited link: {link}")
                         return link
                         
         except Exception as e:
