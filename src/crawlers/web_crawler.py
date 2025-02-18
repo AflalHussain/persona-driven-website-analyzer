@@ -163,32 +163,35 @@ class WebCrawler:
                 "height": dimensions["height"]
             })
             
-            # Try to load lazy content, but don't fail if it times out
+            # Try to load lazy content with timeout
             try:
-                await page.evaluate("""() => {
-                    const scrollStep = 100;
-                    const delay = 100;
-                    
-                    return new Promise((resolve) => {
-                        let lastOffset = window.pageYOffset;
+                await asyncio.wait_for(
+                    page.evaluate("""() => {
+                        const scrollStep = 100;
+                        const delay = 100;
                         
-                        function scrollDown() {
-                            window.scrollBy(0, scrollStep);
+                        return new Promise((resolve) => {
+                            let lastOffset = window.pageYOffset;
                             
-                            if (window.pageYOffset !== lastOffset) {
-                                lastOffset = window.pageYOffset;
-                                setTimeout(scrollDown, delay);
-                            } else {
-                                window.scrollTo(0, 0);
-                                resolve();
+                            function scrollDown() {
+                                window.scrollBy(0, scrollStep);
+                                
+                                if (window.pageYOffset !== lastOffset) {
+                                    lastOffset = window.pageYOffset;
+                                    setTimeout(scrollDown, delay);
+                                } else {
+                                    window.scrollTo(0, 0);
+                                    resolve();
+                                }
                             }
-                        }
-                        
-                        scrollDown();
-                    });
-                }""", timeout=10000)  # 10 second timeout for scrolling
-            except Exception as e:
-                logger.warning(f"Timeout during lazy loading scroll, continuing with capture: {str(e)}")
+                            
+                            scrollDown();
+                        });
+                    }"""),
+                    timeout=10.0  # 10 seconds timeout
+                )
+            except asyncio.TimeoutError:
+                logger.warning("Timeout during lazy loading scroll, continuing with capture")
             
             # Take the screenshot of whatever content we have
             screenshot = await page.screenshot(

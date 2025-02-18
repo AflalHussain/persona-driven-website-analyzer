@@ -11,6 +11,9 @@ The Automated Website Analysis Agent is designed to analyze websites from multip
 * Autonomous Website Exploration: The agent autonomously navigates websites
 * Combined Textual and Visual Analysis: Analyzes both content and layout
 * Detailed Report Generation: Generates comprehensive individual and group reports
+* REST API: Access all functionality through HTTP endpoints
+* Asynchronous Processing: Long-running analyses are handled asynchronously
+
 
 ## Requirements
 
@@ -22,6 +25,8 @@ The Automated Website Analysis Agent is designed to analyze websites from multip
   - python-dotenv
   - Pillow
   - logging
+  - fastapi
+  - uvicorn
 
 ## Installation
 
@@ -41,13 +46,72 @@ export ANTHROPIC_API_KEY=<your_api_key>
 ```
 
 ## Usage
+### 1. REST API
 
-### 1. Single Persona Analysis
+Start the API server:
+```bash
+uvicorn src.api.fast_api:app --host 0.0.0.0 --port 8000 --reload
+```
+
+#### API Endpoints:
+
+1. Start Single Persona Analysis:
+```bash
+curl -X POST "http://localhost:8000/analyze/single" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "url": "https://www.w3schools.com",
+           "persona_template": {
+             "role": "Developer",
+             "experience_level": "Senior",
+             "primary_goal": "Find contract work",
+             "context": "Looking for remote opportunities",
+             "additional_details": {
+               "preferred_stack": "Full-stack",
+               "availability": "Part-time"
+             }
+           },
+           "max_pages": 3
+         }'
+```
+
+2. Start Focus Group Analysis:
+```bash
+curl -X POST "http://localhost:8000/analyze/focus-group" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "url": "https://www.w3schools.com",
+           "persona_template": {
+             "role": "Developer",
+             "experience_level": "Senior",
+             "primary_goal": "Find contract work",
+             "context": "Looking for remote opportunities",
+             "additional_details": {
+               "preferred_stack": "Full-stack",
+               "availability": "Part-time"
+             }
+           },
+           "num_variations": 3,
+           "max_pages": 3
+         }'
+```
+
+3. Check Analysis Status:
+```bash
+curl "http://localhost:8000/analysis/{task_id}"
+```
+
+4. Health Check:
+```bash
+curl "http://localhost:8000/health"
+```
+### 2. Command Line Interface
+#### 2.1. Single Persona Analysis
 
 Analyze a website from a single predefined persona's perspective:
 
 ```bash
-python run_analysis.py --url https://example.com --persona data_engineer
+python run_analysis.py --url https://databricks.com --persona data_engineer
 ```
 
 Options:
@@ -55,7 +119,7 @@ Options:
 - `--persona`: Name of predefined persona (required)
 - `--max-pages`: Maximum pages to analyze (default: 5)
 
-### 2. Focus Group Analysis
+#### 2.2. Focus Group Analysis
 
 Run analysis with multiple generated persona variations:
 
@@ -85,21 +149,28 @@ Options:
 
 The tool generates several types of reports:
 
-1. Individual Analysis Reports:
-```
-reports/{domain}_{persona_name}_{timestamp}.json
-```
+1. API Analysis Reports:
+   ```
+   reports/api/{task_id}.json              # Successful analysis results
+   reports/api/{task_id}_error.json        # Error information for failed analyses
+   ```
 
-2. Focus Group Reports:
-```
-reports/focus_group_analysis_{timestamp}.json
-reports/focus_group/{persona_name}_{timestamp}.json
-```
+2. CLI Reports:
+   1. Individual Analysis Reports:
+   ```
+   reports/{domain}_{persona_name}_{timestamp}.json
+   ```
 
-3. Generated Personas:
-```
-reports/personas/personas_{role}_{timestamp}.json
-```
+   2. Focus Group Reports:
+   ```
+   reports/focus_group_analysis_{timestamp}.json
+   reports/focus_group/{persona_name}_{timestamp}.json
+   ```
+
+   3. Generated Personas:
+   ```
+   reports/personas/personas_{role}_{timestamp}.json
+   ```
 
 ## Example Templates
 
