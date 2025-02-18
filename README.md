@@ -214,6 +214,11 @@ additional_details:
 }
 ```
 
+## Documentation
+- [Single Persona Analysis Implementation](technical_doc_v1.md)
+- [Focus Group Analysis Implementation](technical_doc_v2.md)
+- [API Integration](technical_doc_v3.md)
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.

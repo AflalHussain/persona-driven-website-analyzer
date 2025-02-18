@@ -1,4 +1,4 @@
-# Technical Documentation v2
+# Technical Documentation: Focus Group Analysis Implementation
 
 ## Major Updates from v1
 
