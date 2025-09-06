@@ -1,0 +1,41 @@
+personas:
+  data_engineer:
+    name: "Data Engineer Dave"
+    interests:
+      - "Data Engineering"
+      - "Machine Learning"
+      - "Big Data Processing"
+      - "Cloud Architecture"
+      - "Data Pipelines"
+    needs:
+      - "Technical documentation"
+      - "Platform capabilities"
+      - "Integration details"
+      - "Pricing information"
+      - "Performance benchmarks"
+    goals:
+      - "Evaluate data processing capabilities"
+      - "Understand MLOps features"
+      - "Compare pricing tiers"
+      - "Find implementation examples"
+      - "Access technical specifications" 
+  business_analyst:
+    name: "Business Analyst Bob"
+    interests:
+      - "Business Intelligence"
+      - "Data Analytics"
+      - "Market Research"
+      - "Reporting Tools"
+      - "Data-Driven Decision Making"
+    needs:
+      - "Dashboard tools"
+      - "Reporting capabilities"
+      - "Data integration solutions"
+      - "User-friendly interfaces"
+      - "Training resources"
+    goals:
+      - "Generate actionable insights"
+      - "Create comprehensive reports"
+      - "Analyze market trends"
+      - "Support strategic planning"
+      - "Improve operational efficiency"

@@ -1,0 +1,333 @@
+#Analyze request
+$ curl -X POST "http://localhost:8000/analyze/focus-group" \
+      -H "Content-Type: application/json" \
+      -d '{
+            "url": "https://www.w3schools.com",
+            "persona_template": {
+              "role": "Developer",
+              "experience_level": "Senior",
+              "primary_goal": "Find contract work",
+              "context": "Looking for remote opportunities",
+              "additional_details": {
+                "preferred_stack": "Full-stack",
+                "availability": "Part-time"
+              }
+            },
+            "num_variations": 2,
+            "max_pages": 3
+          }'
+{"task_id":"a7edc957-1898-499a-bf02-a07ab0053101","status":"accepted","message":"Analysis started"}
+
+Get Response for Request
+$ curl "http://localhost:8000/analysis/d12d88ba-162f-426e-a75f-de3b369f14aa"|jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 12295  100 12295    0     0  3001k      0 --:--:-- --:--:-- --:--:-- 3001k
+{
+  "status": "completed",
+  "result": {
+    "status": "success",
+    "timestamp": "2025-02-18T23:13:48.949434",
+    "url": "https://www.w3schools.com",
+    "num_personas": 2,
+    "report": {
+      "url": "https://www.w3schools.com",
+      "timestamp": "20250218_230805",
+      "num_personas": 2,
+      "common_patterns": {
+        "likes": [
+          [
+            "Structured learning path for full-stack development",
+            2
+          ],
+          [
+            "Covers React and Vue.js (aligns with Alex's key interests)",
+            1
+          ],
+          [
+            "Free accessibility to quality technical content",
+            1
+          ],
+          [
+            "Comprehensive coverage of React and Vue (matches interests)",
+            1
+          ],
+          [
+            "Free access to learning materials (supports continuous learning)",
+            1
+          ]
+        ],
+        "dislikes": [
+          [
+            "Dense navigation might overwhelm",
+            1
+          ],
+          [
+            "No clear indication of content freshness/updates",
+            1
+          ],
+          [
+            "Limited project-based learning visibility",
+            1
+          ],
+          [
+            "No clear project-based learning focus (vs Alex's practical needs)",
+            1
+          ],
+          [
+            "Limited advanced/enterprise content",
+            1
+          ]
+        ],
+        "expectations": [
+          [
+            "Detailed framework-specific tutorials",
+            3
+          ],
+          [
+            "Hands-on coding exercises",
+            1
+          ],
+          [
+            "Practical exercises for real-world scenarios",
+            1
+          ],
+          [
+            "Practical exercises with real-world applications",
+            1
+          ],
+          [
+            "Detailed course syllabus",
+            1
+          ]
+        ]
+      },
+      "individual_reports": [
+        {
+          "persona_name": "Alex Chen",
+          "start_url": "https://www.w3schools.com",
+          "timestamp": "2025-02-18 23:11:03",
+          "pages_analyzed": [
+            {
+              "url": "https://www.w3schools.com",
+              "summary": "Educational platform (W3Schools) offering comprehensive web development tutorials and resources",
+              "likes": [
+                "Covers React and Vue.js (aligns with Alex's key interests)",
+                "Structured learning path for full-stack development",
+                "Free accessibility to quality technical content"
+              ],
+              "dislikes": [
+                "Dense navigation might overwhelm",
+                "No clear indication of content freshness/updates",
+                "Limited project-based learning visibility"
+              ],
+              "click_reasons": [
+                "Access to JavaScript framework tutorials",
+                "Potential for skill maintenance/updates"
+              ],
+              "next_expectations": [
+                "Detailed framework-specific tutorials",
+                "Hands-on coding exercises"
+              ],
+              "visual_analysis": [
+                "Navigation-heavy layout with hierarchical menu structure",
+                "Simple, clean design with minimal graphics",
+                "Multiple dropdown menus and search functionality",
+                "Tutorial-focused organization with clear categorization"
+              ],
+              "overall_impression": "Valuable resource for maintaining technical expertise but may require supplementation with more project-focused learning platforms."
+            },
+            {
+              "url": "https://www.w3schools.com/react/default.asp",
+              "summary": "Educational platform offering structured learning paths in modern web development technologies.",
+              "likes": [
+                "Comprehensive coverage of React and Vue (matches interests)",
+                "Free access to learning materials (supports continuous learning)",
+                "Clear organization of topics (aids efficient learning)"
+              ],
+              "dislikes": [
+                "No clear project-based learning focus (vs Alex's practical needs)",
+                "Limited advanced/enterprise content",
+                "No apparent community/networking features"
+              ],
+              "click_reasons": [
+                "React/Vue tutorials align with technical interests",
+                "Certification options could help with client credibility"
+              ],
+              "next_expectations": [
+                "Detailed framework-specific tutorials",
+                "Practical exercises for real-world scenarios"
+              ],
+              "visual_analysis": [
+                "Standard W3Schools layout with navigation menu and search",
+                "Simple, clean interface with predominantly white background",
+                "Hierarchical navigation structure with clear categorization"
+              ],
+              "overall_impression": "Valuable learning resource for maintaining technical expertise, though may need supplementation for professional networking goals."
+            },
+            {
+              "url": "https://www.w3schools.com/react/react_hooks.asp",
+              "summary": "Educational platform offering comprehensive web development tutorials and certification programs.",
+              "likes": [
+                "Coverage of React and Vue aligns with Alex's key interests",
+                "Structured learning path for full-stack development",
+                "Flexible, self-paced learning format"
+              ],
+              "dislikes": [
+                "No clear indication of content depth/complexity levels",
+                "Potentially overwhelming navigation structure",
+                "Limited focus on cloud-native development"
+              ],
+              "click_reasons": [
+                "JavaScript frameworks section matches professional goals",
+                "Certification options could help with client credibility"
+              ],
+              "next_expectations": [
+                "Detailed framework-specific tutorials",
+                "Practical exercises with real-world applications"
+              ],
+              "visual_analysis": [
+                "Navigation-heavy layout with hierarchical menu structure",
+                "Simple text-based design with minimal graphics",
+                "Multiple categorized sections for different programming topics",
+                "Search functionality and login/signup options prominent"
+              ],
+              "overall_impression": "A valuable resource for maintaining technical expertise, though possibly requiring time investment to navigate effectively."
+            }
+          ],
+          "navigation_path": [
+            {
+              "url": "https://www.w3schools.com",
+              "reason": "Initial page"
+            },
+            {
+              "url": "https://www.w3schools.com/react/default.asp",
+              "reason": "React/Vue tutorials align with technical interests"
+            },
+            {
+              "url": "https://www.w3schools.com/react/react_hooks.asp",
+              "reason": "JavaScript frameworks section matches professional goals"
+            }
+          ],
+          "exit_reason": "",
+          "information_coverage": 0,
+          "found_ctas": [],
+          "final_conclusion": "As a freelance developer focused on modern JavaScript frameworks and cloud-native development, W3Schools partially meets my needs by providing comprehensive coverage of React and Vue.js in a flexible, self-paced format. While the free access to structured learning materials is valuable for maintaining my technical expertise, the platform falls short in areas crucial to my professional goals - notably lacking cloud-native development content, project-based learning opportunities, and networking features that could help build my client base. Given these limitations, I would recommend using W3Schools as a supplementary reference resource alongside other platforms that better address my needs for advanced enterprise content, community building, and practical project experience."
+        },
+        {
+          "persona_name": "Sarah Martinez",
+          "start_url": "https://www.w3schools.com",
+          "timestamp": "2025-02-18 23:13:41",
+          "pages_analyzed": [
+            {
+              "url": "https://www.w3schools.com",
+              "summary": "Educational technology platform offering structured learning paths and certifications in various programming languages and technologies.",
+              "likes": [
+                "Structured learning approach matching Sarah's need for milestone-based progress",
+                "Comprehensive coverage of emerging technologies",
+                "Professional certification options supporting career development"
+              ],
+              "dislikes": [
+                "Limited focus on system architecture specifics",
+                "No apparent community/mentoring features",
+                "Potentially too basic for her expertise level"
+              ],
+              "click_reasons": [
+                "Professional certification opportunities",
+                "Access to emerging technology tutorials"
+              ],
+              "next_expectations": [
+                "Detailed course syllabus",
+                "Certification requirements and credentials"
+              ],
+              "visual_analysis": [
+                "Simple hierarchical layout with tutorial categories",
+                "Navigation menu with clear section headers",
+                "Search functionality and login/signup options",
+                "Clean, minimal design focused on content organization"
+              ],
+              "overall_impression": "A solid learning platform that partially aligns with Sarah's professional development goals but may need supplementation for advanced architectural expertise."
+            },
+            {
+              "url": "https://campus.w3schools.com/collections/certifications/products/modern-web-development-certification",
+              "summary": "Professional development platform offering structured certification courses and career paths aligned with technical education.",
+              "likes": [
+                "Organized category structure for learning paths",
+                "Focus on professional certification options",
+                "Clear emphasis on structured progression"
+              ],
+              "dislikes": [
+                "Repetitive navigation elements suggest poor optimization",
+                "Unclear pricing/access model",
+                "Limited information about specific course content"
+              ],
+              "click_reasons": [
+                "Professional development opportunities align with her goals",
+                "Potential platform for expanding expertise in emerging technologies"
+              ],
+              "next_expectations": [
+                "Detailed course curriculum information",
+                "Specific certification track details"
+              ],
+              "visual_analysis": [
+                "Standard e-learning platform layout with top navigation",
+                "Menu structure focuses on educational categories",
+                "Appears to be a straightforward, utilitarian design with minimal visual flourishes"
+              ],
+              "overall_impression": "While the platform aligns with Sarah's professional development goals, the current page implementation suggests technical issues that may concern her as a system architect."
+            },
+            {
+              "url": "https://campus.w3schools.com/products/w3schools-full-access-course",
+              "summary": "Professional development and certification platform that aligns with Sarah's technical mentoring and professional growth interests.",
+              "likes": [
+                "Structured career paths align with her goal for professional development",
+                "Certification options support her consulting business aspirations",
+                "Clear categorization of learning resources"
+              ],
+              "dislikes": [
+                "Repetitive menu structure suggests poor optimization (relevant to her system architecture interests)",
+                "Limited visual engagement for professional platform",
+                "Unclear value proposition in visible content"
+              ],
+              "click_reasons": [
+                "Career Paths section could help establish consulting framework",
+                "Certification Courses align with expanding expertise goal"
+              ],
+              "next_expectations": [
+                "Detailed course/certification roadmaps",
+                "Specific technology stack learning paths"
+              ],
+              "visual_analysis": [
+                "Standard e-learning platform layout with top navigation",
+                "Appears to be a menu/navigation-heavy page with repeated elements",
+                "Basic black/white color scheme with minimal styling"
+              ],
+              "overall_impression": "While the platform offers relevant professional development opportunities, the user interface needs optimization to better serve experienced professionals like Sarah."
+            }
+          ],
+          "navigation_path": [
+            {
+              "url": "https://www.w3schools.com",
+              "reason": "Initial page"
+            },
+            {
+              "url": "https://campus.w3schools.com/collections/certifications/products/modern-web-development-certification",
+              "reason": "Professional development opportunities align with her goals"
+            },
+            {
+              "url": "https://campus.w3schools.com/products/w3schools-full-access-course",
+              "reason": "Career Paths section could help establish consulting framework"
+            }
+          ],
+          "exit_reason": "",
+          "information_coverage": 0.2,
+          "found_ctas": [],
+          "final_conclusion": "As a senior developer focused on system architecture and professional growth, W3Schools offers a mixed value proposition for my needs. While the platform provides structured learning paths and certification options that could support my consulting business aspirations, the content appears too basic for my expertise level and lacks the advanced system architecture focus I require. The website's own technical implementation issues, such as repetitive navigation and poor optimization, raise concerns about the depth of technical expertise being shared. Given these factors, I would recommend exploring more advanced platforms for my professional development, though W3Schools could serve as a useful reference when mentoring junior developers or reviewing fundamentals."
+        }
+      ],
+      "summary": "Here's my analysis of the focus group results for W3Schools:\n\n1. Key Patterns Across Personas:\n- Strong appreciation for structured learning paths, particularly for full-stack development\n- Emphasis on practical, hands-on learning expectations\n- Interest in modern frameworks (React, Vue.js)\n- Value placed on free access to educational content\n- Desire for real-world application of knowledge\n\n2. Notable Differences Between Personas:\n- While the sample size is small (2 participants), there seems to be varying levels of concern about:\n  * Navigation complexity\n  * Content update transparency\n  * Advanced/enterprise content needs\n  * Project-based learning requirements\n\n3. Main Recommendations:\n1. Enhance Project-Based Learning:\n   - Integrate more practical, real-world projects\n   - Make project-based learning more visible in the navigation\n\n2. Improve Content Organization:\n   - Simplify navigation structure\n   - Add clear content update timestamps\n   - Better organize framework-specific tutorials\n\n3. Expand Advanced Content:\n   - Add more enterprise-level materials\n   - Develop more in-depth framework tutorials\n   - Include more complex real-world scenarios\n\n4. Learning Path Enhancement:\n   - Strengthen the connection between tutorials and practical exercises\n   - Provide clearer progression paths for different skill levels\n\nNote: Given the small sample size (2 participants), these findings should be validated with additional research before making major changes."
+    }
+  },
+  "error": null
+}
+
